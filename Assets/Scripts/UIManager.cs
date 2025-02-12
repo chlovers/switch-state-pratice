@@ -13,18 +13,21 @@ public class UIManager : MonoBehaviour
 
     public void EnableMainMenu()
     {
+        TurnoffAll();
         mainmenu.SetActive(true);
 
     }
 
     public void EnablePause()
     {
+        TurnoffAll();
         pausemenu.SetActive(true);
 
     }
 
     public void GamePlayUI()
     {
+        TurnoffAll();
         gameplayUI.SetActive(true);
     }
 

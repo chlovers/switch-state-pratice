@@ -84,7 +84,6 @@ public class GameStateManager : MonoBehaviour
             case GameState.MainMenu_State:
                 Debug.Log("Switched to MainMenu State");
                 Time.timeScale = 0;
-                gameManager.iManager.TurnoffAll();
                 gameManager.iManager.EnableMainMenu();
                 Cursor.visible = true;
                 // TODO: Add logic for when the game enters the Main Menu (e.g., show UI)
@@ -94,7 +93,6 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Switched to Gameplay State");
                 // TODO: Add logic for starting/resuming the game (e.g., enable player movement)
                 Time.timeScale = 1;
-                gameManager.iManager.TurnoffAll();
                 gameManager.iManager.GamePlayUI();
                 Cursor.visible = false;
                 break;
@@ -103,7 +101,6 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Switched to Paused State");
                 // TODO: Add logic for pausing the game (e.g., stop player movement, show pause menu)
                 Time.timeScale = 0;
-                gameManager.iManager.TurnoffAll();
                 gameManager.iManager.EnablePause();
                 Cursor.visible = true;
                 break;
