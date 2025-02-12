@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
@@ -24,7 +25,7 @@ public class GameStateManager : MonoBehaviour
 
   
 
-    private void Start()
+    public void Start()
     {
         // Set the initial state of the game to Main Menu when the game starts
         ChangeState(GameState.MainMenu_State);
@@ -55,10 +56,18 @@ public class GameStateManager : MonoBehaviour
             ChangeState(GameState.MainMenu_State);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && (currentState == GameState.Gameplay_State || currentState == GameState.Paused_State))
         {
-            ChangeState(GameState.Paused_State);
+            if (currentState == GameState.Paused_State)
+            {
+                ChangeState(GameState.Gameplay_State);
+            }
+            else
+            {
+                ChangeState(GameState.Paused_State);
+            }
         }
+
 
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -77,6 +86,7 @@ public class GameStateManager : MonoBehaviour
                 Time.timeScale = 0;
                 gameManager.iManager.TurnoffAll();
                 gameManager.iManager.EnableMainMenu();
+                Cursor.visible = true;
                 // TODO: Add logic for when the game enters the Main Menu (e.g., show UI)
                 break;
 
@@ -86,6 +96,7 @@ public class GameStateManager : MonoBehaviour
                 Time.timeScale = 1;
                 gameManager.iManager.TurnoffAll();
                 gameManager.iManager.GamePlayUI();
+                Cursor.visible = false;
                 break;
 
             case GameState.Paused_State:
@@ -94,8 +105,21 @@ public class GameStateManager : MonoBehaviour
                 Time.timeScale = 0;
                 gameManager.iManager.TurnoffAll();
                 gameManager.iManager.EnablePause();
+                Cursor.visible = true;
                 break;
         }
+    }
+
+    public void playbutton()
+    {
+        ChangeState(GameState.Gameplay_State);
+
+    }
+
+    public void backtomenu()
+    {
+
+        ChangeState(GameState.MainMenu_State);
     }
 
 
